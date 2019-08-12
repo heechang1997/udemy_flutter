@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import './question.dart';
+
 // void main() {
 //   runApp(MyApp());
 // }
@@ -7,14 +9,23 @@ import 'package:flutter/material.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    //TODO
+    return _MyAppState();
+  }
 }
+// _ means to be used onyl in this file
 
-class MyAppState extends State {
-  var questionIndex = 0;
+class _MyAppState extends State {
+  var _questionIndex = 0;
 
-  void answerQuestion() {
-    questionIndex = questionIndex + 1;
-    print(questionIndex);
+  void _answerQuestion() {
+    //setstate rerenders the UI - not entire but calls build again
+    setState(() {
+      _questionIndex = _questionIndex + 1;
+    });
+    print(_questionIndex);
   }
 
   @override
@@ -30,12 +41,12 @@ class MyAppState extends State {
         ),
         body: Column(
           children: [
-            Text(
-              questions[questionIndex],
+            Question(
+              questions[_questionIndex],
             ),
             RaisedButton(
               child: Text('Answer 1'),
-              onPressed: answerQuestion,
+              onPressed: _answerQuestion,
             ),
             RaisedButton(
               child: Text('Answer 2'),
